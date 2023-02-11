@@ -1,5 +1,5 @@
 class Solution:
-    def evalRPN(self, tokens: List[str]) -> int:
+    def evalRPN(self, tokens: List):
         stack = []
         for token in tokens:
             match token:
