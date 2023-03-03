@@ -1,3 +1,12 @@
+class Element:
+    def __init__(self, value, count, index):
+        self.val = value
+        self.cnt = count
+        self.idx = index
+
+    def inc(self):
+        self.cnt += 1
+
 class Solution:
     def topKFrequent(self, nums: List[int], k: int) -> List[int]:
         num_map = {}
@@ -25,3 +34,29 @@ class Solution:
             self.arrangeKthFrequentItem(num_counts, k - pivot_k, pivot_idx + 1, right)
         else:
             self.arrangeKthFrequentItem(num_counts, k, left, pivot_idx - 1) 
+
+    def topKFrequentByHeap(self, nums: List[int], k: int) -> List[int]:
+        heap = []
+        elem_map = {}
+        for num in nums:
+            elem = elem_map.get(num, None)
+            if elem is None:
+                new_elem = Element(num, 1, len(heap))
+                elem_map[num] = new_elem
+                heap.append(new_elem)
+            else:
+                elem.inc()
+                self.adjustUpwards(heap, elem)
+                
+        return [elem.val for elem in heap[:k]]
+
+    def adjustUpwards(self, heap: List[Element], elem: Element):
+        # TODO
+        parent_idx = int(elem.idx / 2)
+        while parent_idx < elem.idx:
+            if heap[parent_idx].cnt >= elem.cnt:
+                break
+            heap[parent_idx], heap[elem.idx] = elem, heap[parent_idx]
+            heap[elem.idx].idx = elem.idx
+            elem.idx = parent_idx
+            parent_idx = int(elem.idx / 2)
