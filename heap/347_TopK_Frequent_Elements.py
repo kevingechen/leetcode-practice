@@ -48,15 +48,37 @@ class Solution:
                 elem.inc()
                 self.adjustUpwards(heap, elem)
                 
-        return [elem.val for elem in heap[:k]]
+        results = []
+        for i in range(k):
+            results.append(heap[0].val)
+            last_elem = heap.pop()
+            if len(heap) > 0:
+                heap[0] = last_elem
+                heap[0].idx = 0
+                self.adjustDownwards(heap, heap[0])
+        return results
 
     def adjustUpwards(self, heap: List[Element], elem: Element):
-        # TODO
-        parent_idx = int(elem.idx / 2)
-        while parent_idx < elem.idx:
+        parent_idx = int(elem.idx-1 / 2)
+        while parent_idx >= 0:
             if heap[parent_idx].cnt >= elem.cnt:
                 break
             heap[parent_idx], heap[elem.idx] = elem, heap[parent_idx]
             heap[elem.idx].idx = elem.idx
             elem.idx = parent_idx
-            parent_idx = int(elem.idx / 2)
+            parent_idx = int(elem.idx-1 / 2)
+    
+    def adjustDownwards(self, heap: List[Element], elem: Element):
+        hsize = len(heap)
+        while 2 * elem.idx + 1 < hsize:
+            next_idx = elem.idx
+            left_child_idx = 2 * next_idx + 1
+            right_child_idx = 2 * next_idx + 2
+            if heap[left_child_idx].cnt > heap[next_idx].cnt:
+                next_idx = left_child_idx
+            if right_child_idx < hsize and heap[right_child_idx].cnt > heap[next_idx].cnt:
+                next_idx = right_child_idx
+            if next_idx == elem.idx: break
+            heap[next_idx], heap[elem.idx] = elem, heap[next_idx]
+            heap[elem.idx].idx = elem.idx
+            elem.idx = next_idx
