@@ -1,18 +1,40 @@
+class PriorityQueueNode:
+    def __init__(self, num: int, nums_idx: int, pq_idx: int):
+        self.num = num
+        self.nums_idx = nums_idx
+        self.pq_idx = pq_idx
+
 class Solution:
     def maxSlidingWindow(self, nums: List[int], k: int) -> List[int]:
+	pq = []
         results = []
-        max_queue = []
-        qsize = 0
-        for i in range(k - 1):
-            self.updateMaxQueue(max_queue, qsize, nums[i])
-            qsize += 1
-        for i in range(k - 1, len(nums)):
-            self.updateMaxQueue(max_queue, qsize, nums[i])
-            results.append( max_queue.pop(0) )
+        nums_pq_map = {}
+        for i in range(k):
+            node = PriorityQueueNode(nums[i], i, i)
+            nums_pq_map[i] = node
+            pq.append(node)
+            self.adjustUp(pq, i, nums_pq_map)
+        results.append(pq[0].num)
+        for i in range(k, len(nums)):
+            node = nums_pq_map[i - k]
+            node.num = nums[i]
+            node.nums_idx = i
+            nums_pq_map[i] = node
+            del nums_pq_map[i - k]
+            self.adjustUp(pq, node.pq_idx, nums_pq_map)
+            results.append(pq[0].num)
         return results
-    
-    def updateMaxQueue(self, max_queue: List[int], qsize: int, num: int):
-        for i in range(qsize-1, -1, -1):
-            if max_queue[i] >= num: break
-            max_queue[i] = num
-        max_queue.append(num)
+
+    def adjustUp(self, pq: List[int], pq_idx: int, nums_pq_map: Dict<int, int>):
+        if pq_idx == 0: return
+        parent_idx = int((pq_idx - 1) / 2)
+        while parent_idx > 0:
+            node = pq[pq_idx]
+            pnode = pq[parent_idx]
+            if pnode.num >= node.num:
+                break
+            pq[parent_idx], pq[pq_idx] = pq[pq_idx], pq[parent_idx]
+            # TODO
+            pq_idx = parent_idx
+            parent_idx = int((pq_idx - 1) / 2)
+        return
