@@ -23,42 +23,54 @@ Explanation: "the", "is", "sunny" and "day" are the four most frequent words, wi
 ## Solution
 ### Java
 ```java
-class Heap {
-    public Integer len;
-    public String[] heap;
-    public Map<String, Integer> wordCntMap;
+public class Heap<T extends Comparable<T>> {
+    private int size;
+    private int capaciy;
+    private List<T> heap;
+    private HeapType type;
 
-    public Heap(Map<String, Integer> wordCntMap) {
-        this.heap = new String[wordCntMap.size()];
-        this.wordCntMap = wordCntMap;
-        this.len = 0;
-        for (String word : wordCntMap.keySet()) {
-            this.push(word);
-        }
+    public static enum HeapType {
+        MAX_HEAP,
+        MIN_HEAP
     }
 
-    public void push(String word) {
-        heap[this.len] = word;
-        this.adjustUp(this.len);
-        this.len += 1;
+    public Heap(int capacity, HeapType heapType) {
+        this.capaciy = capacity;
+        this.heap = new ArrayList<>(capacity);
+        this.size = 0;
+        this.type = heapType;
     }
 
-    public String pop() {
-        String root = heap[0];
-        if (1 == this.len) {
-            return heap[0];
+    public void push(T t) {
+        if (this.size == this.capaciy) {
+            throw new IllegalStateException("Out of capacity!");
         }
-        swap(0, this.len-1);
-        this.len -= 1;
+
+        this.heap.add(t);
+        this.size += 1;
+        adjustUp(this.size - 1);
+
+    }
+
+    public T pop() {
+        if (this.size == 0) {
+            throw new IllegalStateException("Heap empty!");
+        }
+
+        T root = this.heap.get(0);
+        this.size -= 1;
+        this.heap.set(0, this.heap.get(this.size));
+        this.heap.remove(this.size);
         adjustDown(0);
         return root;
     }
 
-    public void adjustUp(Integer pos) {
-        Integer child = pos, parent;
+    private void adjustUp(int index) {
+        int child = index;
+        int parent;
         while (child >= 0) {
             parent = (child - 1) / 2;
-            if (compareTo(parent, child) >= 0) {
+            if (!needSwap(parent, child)) {
                 break;
             }
             swap(child, parent);
@@ -66,59 +78,93 @@ class Heap {
         }
     }
 
-    public void adjustDown(Integer pos) {
-        Integer parent = pos;
-        Integer leftChild = 2 * parent + 1;
-        Integer rightChild = 2 * parent + 2;
-        while (leftChild < this.len) {
-            Integer next = parent;
-            if (compareTo(leftChild, next) > 0) {
+    private void adjustDown(int index) {
+        int parent = index;
+        int leftChild = 2 * parent + 1;
+        int rightChild = 2 * parent + 2;
+        while (leftChild < this.size) {
+            int next = parent;
+            if (needSwap(next, leftChild)) {
                 next = leftChild;
             }
-            if (rightChild < this.len && compareTo(rightChild, next) > 0) {
+            if (needSwap(next, rightChild)) {
                 next = rightChild;
             }
             if (next == parent) {
                 break;
             }
-            swap(parent, next);
+            swap(next, parent);
             parent = next;
             leftChild = 2 * parent + 1;
             rightChild = 2 * parent + 2;
         }
     }
 
-    public void swap(Integer idx1, Integer idx2) {
-        if (idx1 == idx2) {
+    private void swap(int index1, int index2) {
+        if (index1 == index2) {
             return;
         }
-        String tmp = heap[idx1];
-        heap[idx1] = heap[idx2];
-        heap[idx2] = tmp;
+        T tmp = this.heap.get(index1);
+        this.heap.set(index1, this.heap.get(index2));
+        this.heap.set(index2, tmp);
     }
 
-    public Integer compareTo(Integer idx1, Integer idx2) {
-        String w1 = heap[idx1];
-        String w2 = heap[idx2];
-        Integer cntCompareResult = wordCntMap.get(w1).compareTo(wordCntMap.get(w2));
+    private boolean needSwap(int parentIndex, int childIndex) {
+        if (parentIndex < 0) {
+            return false;
+        }
+
+        if (childIndex == 0 || childIndex >= this.size) {
+            return false;
+        }
+
+        int childCompareToParent =
+                this.heap.get(childIndex).compareTo(this.heap.get(parentIndex));
+        return HeapType.MAX_HEAP.equals(this.type) ?
+                childCompareToParent > 0 :
+                childCompareToParent < 0;
+    }
+
+}
+
+class WordNode implements Comparable<WordNode> {
+    public String word;
+    public Integer cnt;
+
+    public WordNode(String word, Integer cnt) {
+        this.word = word;
+        this.cnt = cnt;
+    }
+
+    @Override
+    public int compareTo(WordNode other) {
+        int cntCompareResult = this.cnt.compareTo(other.cnt);
         if (cntCompareResult != 0) {
             return cntCompareResult;
         } else {
-            return w2.compareTo(w1);
+            return other.word.compareTo(this.word);
         }
     }
 }
 
 class Solution {
     public List<String> topKFrequent(String[] words, int k) {
+        // get word count map
         Map<String, Integer> wordCntMap = new HashMap<>();
         for (String word : words) {
             wordCntMap.put(word, wordCntMap.getOrDefault(word, 0) + 1);
         }
-        Heap heap = new Heap(wordCntMap);
+
+        // init heap
+        Heap<WordNode> heap = new Heap(wordCntMap.size(), Heap.HeapType.MAX_HEAP);
+        for (Map.Entry<String, Integer> entry : wordCntMap.entrySet()) {
+            heap.push(new WordNode(entry.getKey(), entry.getValue()));
+        }
+
+        // pick top k words
         List<String> topKWords = new ArrayList<>();
         for (int i = 0; i < k; i++) {
-            topKWords.add( heap.pop() );
+            topKWords.add( heap.pop().word );
         }
         return topKWords;
     }
