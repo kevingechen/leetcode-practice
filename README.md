@@ -8,6 +8,7 @@
 
 ## Hashmap
 + [1. Two Sum](hashmap/1-Two_Sum/)
++ [49. Group Anagrams](hashmap/49-Group_Anagrams/)
 + [128. Longest Consecutive Sequence](hashmap/128-Longest_Consecutive_Sequence/)
 + [767. Reorganize String](hashmap/767-Reorganize_String/)
 
