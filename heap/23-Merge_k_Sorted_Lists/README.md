@@ -19,13 +19,13 @@ merging them into one sorted list:
 1->1->2->3->4->4->5->6
 ```
 
-**Example 2**
+**Example 2:**
 ```
 Input: lists = []
 Output: []
 ```
 
-**Example 3**
+**Example 3:**
 ```
 Input: lists = [[]]
 Output: []
@@ -40,7 +40,53 @@ Output: []
 + The sum of `lists[i].length` will not exceed `10^4`.
 
 
-## Solution in Python3
+## Solution
+
+### Java
+```java
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode mergeKLists(ListNode[] lists) {
+        // Create a custom min heap based on ListNode's val
+        Comparator<ListNode> minHeapComparator = Comparator.comparingInt(node -> node.val);
+        PriorityQueue<ListNode> minHeap = new PriorityQueue<>(minHeapComparator);
+
+        // Initialize dummy node, whose next will be the new head
+        ListNode dummy = new ListNode(0, null);
+        ListNode tail = dummy;
+
+        // Initialize the min heap
+        for (int i = 0; i < lists.length; i++) {
+            if (null != lists[i]) {
+                minHeap.add(lists[i]);
+            }
+        }
+
+        // Update heap and result
+        while (!minHeap.isEmpty()) {
+            ListNode node = minHeap.poll();
+            tail.next = node;
+            tail = node;
+            if (null != node.next) {
+                minHeap.add(node.next);
+            }
+        }
+
+        return dummy.next;
+    }
+}
+```
+
+### Python3
 ```python
 # Definition for singly-linked list.
 # class ListNode:
