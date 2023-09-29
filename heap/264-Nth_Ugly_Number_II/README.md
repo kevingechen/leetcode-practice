@@ -22,7 +22,47 @@ Explanation: 1 has no prime factors, therefore all of its prime factors are limi
 **Constraints:**
 + `1 <= n <= 1690`
 
-## Solution in Python3
+## Solution
+
+### Java
+```java
+class Solution {
+    public int nthUglyNumber(int n) {
+        Comparator<Integer> minHeapComparator = Comparator.naturalOrder();
+        PriorityQueue<Integer> minHeap = new PriorityQueue<>(minHeapComparator);
+        minHeap.add(1);
+
+        HashSet<Integer> existingSet = new HashSet<>();
+        existingSet.add(1);
+
+        int current = 0;
+        for (int i = 0; i < n; i++) {
+            current = minHeap.poll();
+            updateByFactor(current, 2, existingSet, minHeap);
+            updateByFactor(current, 3, existingSet, minHeap);
+            updateByFactor(current, 5, existingSet, minHeap);
+        }
+
+        return current;
+    }
+
+    public void updateByFactor(int current, int factor,
+                               HashSet<Integer> existingSet,
+                               PriorityQueue<Integer> minHeap) {
+        try {
+            int next = Math.multiplyExact(current, factor);
+            if (!existingSet.contains(next)) {
+                minHeap.add(next);
+                existingSet.add(next);
+            }
+        } catch (ArithmeticException e) {
+            // Multiplication overflow occurred, skip it
+        }
+    }
+}
+```
+
+### Python3
 ```python
 class UglyFactor:
     def __init__(self, ugly_set, ugly_seq, seq_idx, factor):
