@@ -11,7 +11,7 @@ Implement the MedianFinder class:
 + `void addNum(int num)` adds the integer num from the data stream to the data structure.
 + `double findMedian()` returns the median of all elements so far. Answers within 10-5 of the actual answer will be accepted.
 
-**Example 1**
+**Example 1:**
 ```
 Input
 ["MedianFinder", "addNum", "addNum", "findMedian", "addNum", "findMedian"]
@@ -28,7 +28,16 @@ medianFinder.addNum(3);    // arr[1, 2, 3]
 medianFinder.findMedian(); // return 2.0
 ```
 
-## Solution in Java
+**Constraints:**
++ `-10^5 <= num <= 10^5`
++ There will be at least one element in the data structure before calling `findMedian`.
++ At most `5 * 10^4` calls will be made to `addNum` and `findMedian`.
+
+
+## Solution
+
+### Java
+#### Implementation with Heap from scratch
 ```java
 
 class Heap<T extends Comparable<T>> {
@@ -190,4 +199,61 @@ class MedianFinder {
     }
 }
 
+```
+
+#### Implementation with java.util.PriorityQueue
+```java
+class MedianFinder {
+
+    private PriorityQueue<Integer> higherPartMinHeap;
+    private PriorityQueue<Integer> lowerPartMaxHeap;
+
+    public MedianFinder() {
+        higherPartMinHeap = new PriorityQueue<>(Comparator.naturalOrder());
+        lowerPartMaxHeap = new PriorityQueue<>(Comparator.reverseOrder());
+    }
+    
+    public void addNum(int num) {
+        if (lowerPartMaxHeap.isEmpty()) {
+            lowerPartMaxHeap.add(num);
+            return;
+        }
+        if (higherPartMinHeap.isEmpty()) {
+            lowerPartMaxHeap.add(num);
+            higherPartMinHeap.add(lowerPartMaxHeap.poll());
+            return;
+        }
+        
+        int lowSize = lowerPartMaxHeap.size();
+        int highSize = higherPartMinHeap.size();
+        if (num < lowerPartMaxHeap.peek()) {
+            lowerPartMaxHeap.add(num);
+            if (lowSize > highSize) {
+                higherPartMinHeap.add(lowerPartMaxHeap.poll());
+            }
+        } else if (num > higherPartMinHeap.peek()) {
+            higherPartMinHeap.add(num);
+            if (highSize > lowSize) {
+                lowerPartMaxHeap.add(higherPartMinHeap.poll());
+            }
+        } else {
+            if (lowSize > highSize) {
+                higherPartMinHeap.add(num);
+            } else {
+                lowerPartMaxHeap.add(num);
+            }
+        }
+    }
+    
+    public double findMedian() {
+        if (higherPartMinHeap.size() > lowerPartMaxHeap.size()) {
+            return Double.valueOf(higherPartMinHeap.peek());
+        } else if (higherPartMinHeap.size() < lowerPartMaxHeap.size()) {
+            return Double.valueOf(lowerPartMaxHeap.peek());
+        } else {
+            return (Double.valueOf(higherPartMinHeap.peek()) +
+                    Double.valueOf(lowerPartMaxHeap.peek())) / 2;
+        }
+    }
+}
 ```
