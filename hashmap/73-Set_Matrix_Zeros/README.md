@@ -26,6 +26,34 @@ Output: [[0,0,0,0],[0,4,5,0],[0,3,1,0]]
 
 ## Solution
 
+### Java
+```java
+class Solution {
+    public void setZeroes(int[][] matrix) {
+        HashSet<Integer> zeroRowsSet = new HashSet<>();
+        HashSet<Integer> zeroColsSet = new HashSet<>();
+        int rowNum = matrix.length;
+        int colNum = matrix[0].length;
+        for (int x = 0; x < rowNum; x++) {
+            for (int y = 0; y < colNum; y++) {
+                if (0 == matrix[x][y]) {
+                    zeroRowsSet.add(x);
+                    zeroColsSet.add(y);
+                }
+            }
+        }
+
+        for (int x = 0; x < rowNum; x++) {
+            for (int y = 0; y < colNum; y++) {
+                if (zeroRowsSet.contains(x) || zeroColsSet.contains(y)) {
+                    matrix[x][y] = 0;
+                }
+            }
+        }
+    }
+}
+```
+
 ### Python
 ```python3
 class Solution:
