@@ -39,7 +39,37 @@ Note that only one of the two unmatched 1s is counted as a cow since the non-bul
 + `secret.length == guess.length`
 + `secret` and `guess` consist of digits only.
 
+
+
 ## Solution
+
+### Java
+```java
+class Solution {
+    public String getHint(String secret, String guess) {
+        int bulls = 0, cows = 0;
+        int slen = secret.length();
+        Map<Character, Integer> secretDigitMap = new HashMap<>(slen);
+        Map<Character, Integer> guessDigitMap = new HashMap<>(slen);
+        for (int i = 0; i < slen; i++) {
+            char s = secret.charAt(i);
+            char g = guess.charAt(i);
+            if (s == g) {
+                bulls++;
+            } else {
+                secretDigitMap.put(s, secretDigitMap.getOrDefault(s, 0) + 1);
+                guessDigitMap.put(g, guessDigitMap.getOrDefault(g, 0) + 1);
+            }
+        }
+
+        for (Map.Entry<Character, Integer> entry : secretDigitMap.entrySet()) {
+            cows += Math.min(entry.getValue(), guessDigitMap.getOrDefault(entry.getKey(), 0));
+        }
+
+        return String.format("%dA%dB", bulls, cows);
+    }
+}
+```
 
 ### Python
 ```python3
