@@ -12,6 +12,7 @@
 + [73. Set Matrix Zeros](hashmap/73-Set_Matrix_Zeros/)
 + [128. Longest Consecutive Sequence](hashmap/128-Longest_Consecutive_Sequence/)
 + [299. Bulls and Cows](hashmap/299-Bulls_and_Cows/)
++ [350. Intersection of Two Arrays II](hashmap/350-Intersection_of_Two_Arrays_II/)
 + [767. Reorganize String](hashmap/767-Reorganize_String/)
 
 ## Heap

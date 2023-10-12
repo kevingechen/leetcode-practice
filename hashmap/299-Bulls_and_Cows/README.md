@@ -71,8 +71,8 @@ class Solution {
 }
 ```
 
-### Python
-```python3
+### Python3
+```python
 class Solution:
     def getHint(self, secret: str, guess: str) -> str:
         length = len(secret)
