@@ -22,6 +22,37 @@ Explanation: [9,4] is also accepted.
 
 ## Solution
 
+### Java
+```java
+class Solution {
+    public int[] intersect(int[] nums1, int[] nums2) {
+        List<Integer> results = new ArrayList<>();
+        Map<Integer, Integer> numsCountMap1 = countNums(nums1);
+        Map<Integer, Integer> numsCountMap2 = countNums(nums2);
+        for (Map.Entry<Integer, Integer> entry : numsCountMap1.entrySet()) {
+            int num = entry.getKey();
+            int count1 = entry.getValue();
+            int count2 = numsCountMap2.getOrDefault(num, 0);
+            int intersectionCount = Math.min(count1, count2);
+            for (int i = 0; i < intersectionCount; i++) {
+                results.add(num);
+            }
+        }
+
+        return results.stream().mapToInt(Integer::intValue).toArray();
+    }
+
+    public Map<Integer, Integer> countNums(int[] nums) {
+        Map<Integer, Integer> numsCountMap = new HashMap<>(nums.length);
+        for (int i = 0; i < nums.length; i++) {
+            numsCountMap.put(nums[i], numsCountMap.getOrDefault(nums[i], 0) + 1);
+        }
+
+        return numsCountMap;
+    }
+}
+```
+
 ### Python3
 ```python
 class Solution:
