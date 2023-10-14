@@ -13,6 +13,7 @@
 + [128. Longest Consecutive Sequence](hashmap/128-Longest_Consecutive_Sequence/)
 + [299. Bulls and Cows](hashmap/299-Bulls_and_Cows/)
 + [350. Intersection of Two Arrays II](hashmap/350-Intersection_of_Two_Arrays_II/)
++ [380. Insert and GetRandom](hashmap/380-Insert_and_GetRandom/)
 + [767. Reorganize String](hashmap/767-Reorganize_String/)
 
 ## Heap
