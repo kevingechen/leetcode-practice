@@ -7,6 +7,7 @@
 ## Queue
 + [54. Spiral Matrix](queue/54-Spiral_Matrix/)
 + [225. Implement Stack Using Queues](queue/225-Implement_Stack_Using_Queues/)
++ [239. Sliding Window Maximum](queue/239-Sliding_Window_Maximum/)
 
 ## Hashmap
 + [1. Two Sum](hashmap/1-Two_Sum/)
