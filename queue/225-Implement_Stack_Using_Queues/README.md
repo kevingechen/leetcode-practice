@@ -40,6 +40,58 @@ myStack.empty(); // return False
 
 ## Solution
 
+### Java
+```java
+class MyStack {
+
+    private int stackSize;
+    private List<Integer> q1;
+    private List<Integer> q2;
+
+    public MyStack() {
+        this.stackSize = 0;
+        this.q1 = new ArrayList<>();
+        this.q2 = new ArrayList<>();
+    }
+    
+    public void push(int x) {
+        if (!q2.isEmpty()) {
+            q2.add(x);
+        } else {
+            q1.add(x);
+        }
+        stackSize++;
+    }
+    
+    public int pop() {
+        stackSize--;
+        if (!q2.isEmpty()) {
+            for (int i = 0; i < stackSize; i++) {
+                q1.add(q2.remove(0));
+            }
+            return q2.remove(0);
+        } else {
+            for (int i = 0; i < stackSize; i++) {
+                q2.add(q1.remove(0));
+            }
+            return q1.remove(0);
+        }
+    }
+    
+    public int top() {
+        if (!q2.isEmpty()) {
+            return q2.get(q2.size() - 1);
+        } else {
+            return q1.get(q1.size() - 1);
+        }
+    }
+    
+    public boolean empty() {
+        return 0 == stackSize;
+    }
+}
+```
+
 ### Python3
 ```python
 class MyStack:
