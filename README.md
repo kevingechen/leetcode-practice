@@ -3,6 +3,7 @@
 ## Linked-List
 
 ## Stack
++ [20. Valid Parentheses](stack/20-Valid_Parentheses/)
 
 ## Queue
 + [54. Spiral Matrix](queue/54-Spiral_Matrix/)
