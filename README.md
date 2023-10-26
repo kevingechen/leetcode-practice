@@ -5,6 +5,7 @@
 ## Stack
 + [20. Valid Parentheses](stack/20-Valid_Parentheses/)
 + [150. Evaluate Reverse Polish Notation](stack/150-Evaluate_Reverse_polish_notation/)
++ [155. Min Stack](stack/155-Min_Stack/)
 
 ## Queue
 + [54. Spiral Matrix](queue/54-Spiral_Matrix/)
