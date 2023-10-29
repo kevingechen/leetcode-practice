@@ -8,6 +8,7 @@
 + [155. Min Stack](stack/155-Min_Stack/)
 + [224. Basic Calculator](stack/224-Basic_Calculator/)
 + [227. Basic Calculator II](stack/227-Basic_Calculator_II/)
++ [232. Implement Queue using Stacks](stack/232-Implement_Queue_Using_Two_Stacks/)
 
 ## Queue
 + [54. Spiral Matrix](queue/54-Spiral_Matrix/)
