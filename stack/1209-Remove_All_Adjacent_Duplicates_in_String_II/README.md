@@ -39,6 +39,50 @@ Output: "ps"
 
 ## Solution
 
+### Java
+```java
+class Solution {
+    public String removeDuplicates(String s, int k) {
+        List<Character> stack = new ArrayList<>();
+        int stackSize = 0;
+        // initialize the stack
+        for (int i = 0; i < k-1; i++) {
+            stack.add(s.charAt(i));
+            stackSize++;
+        }
+
+        // move on till the end of string, and evaluate each duplicate
+        for (int i = k-1; i < s.length(); i++) {
+            stack.add(s.charAt(i));
+            stackSize++;
+            if (stackSize < k) {
+                continue;
+            }
+            boolean lastKDuplicated = true;
+            for (int j = 1; j <= k-1; j++) {
+                if (stack.get(stackSize - j) != stack.get(stackSize - j - 1)) {
+                    lastKDuplicated = false;
+                    break;
+                }
+            }
+            if (lastKDuplicated) {
+                for (int j = 0; j < k; j++) {
+                    stack.remove(--stackSize);
+                }    
+            }
+        }
+
+        // build the remaining string
+        StringBuilder strBuilder = new StringBuilder();
+        for (Character ch :  stack) {
+            strBuilder.append(ch);
+        }
+
+        return strBuilder.toString();
+    }
+}
+```
+
 ### Python3
 ```python
 class Solution:
