@@ -1,6 +1,7 @@
 # My collection of LeetCode solutions by topic
 
 ## Linked-List
++ [2. Add Two Numbers](linked-list/2-Add_Two_Numbers/)
 
 ## Stack
 + [20. Valid Parentheses](stack/20-Valid_Parentheses/)
