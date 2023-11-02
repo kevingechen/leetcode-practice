@@ -35,6 +35,37 @@ Output: false
 
 ## Solution
 
+### Java
+```java
+class Solution {
+    public boolean isValid(String s) {
+        Map<Character, Character> bracketMap = new HashMap<>(3);
+        bracketMap.put(')', '(');
+        bracketMap.put(']', '[');
+        bracketMap.put('}', '{');
+
+        Deque<Character> stack = new ArrayDeque<>();
+        stack.push(s.charAt(0));
+
+        for (int i = 1; i < s.length(); i++) {
+            Character c = s.charAt(i);
+            Character pairBracket = bracketMap.get(c);
+            if (null == pairBracket) {
+                stack.push(c);
+            } else if (stack.isEmpty() || stack.pop() != pairBracket) {
+                return false;
+            }
+        }
+        if (!stack.isEmpty()) {
+            return false;
+        }
+
+        return true;
+    }
+
+}
+```
+
 ### Python3
 ```python
 class Solution:
