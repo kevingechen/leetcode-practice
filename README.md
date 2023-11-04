@@ -3,6 +3,7 @@
 ## Linked-List
 + [2. Add Two Numbers](linked-list/2-Add_Two_Numbers/)
 + [21. Merge Two Sorted Lists](linked-list/21-Merge_Two_Sorted_Lists/)
++ [86. Partiion List](linked-list/86-Partition_List/)
 
 ## Stack
 + [20. Valid Parentheses](stack/20-Valid_Parentheses/)
