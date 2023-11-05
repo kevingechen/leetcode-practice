@@ -36,3 +36,6 @@
 + [347. Top K Frequent Elements](heap/347-Top_K_Frequent_Elements/)
 + [378. Kth Smallest Element In a Sorted Matrix](heap/378-Kth_Smallest_Element_In_a_Sorted_Matrix/)
 + [692. Top K Frequent Words](heap/692-Top_K_Frequent_Words/)
+
+## Binary Search
++ [33. Search in Rotated Sorted Array](binary-search/33-Search_in_Rotated_Sorted_Array/)
