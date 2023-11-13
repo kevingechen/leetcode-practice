@@ -38,6 +38,39 @@ Explanation: There is no cycle in the linked list.
 
 ## Solution
 
+### Java
+```java
+/**
+ * Definition for singly-linked list.
+ * class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) {
+ *         val = x;
+ *         next = null;
+ *     }
+ * }
+ */
+public class Solution {
+    public boolean hasCycle(ListNode head) {
+        ListNode slow = head, fast = head;
+        while (null != fast) {
+            slow = slow.next;
+            fast = fast.next;
+            if (null == fast) {
+                return false;
+            }
+            fast = fast.next;
+            if (slow == fast) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+}
+```
+
 ### Python3
 ```python
 # Definition for singly-linked list.
