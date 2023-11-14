@@ -36,7 +36,7 @@ Output: [-1,-1]
 
 ## Solution
 
-###Java
+### Java
 ```java
 class Solution {
     public int[] searchRange(int[] nums, int target) {
