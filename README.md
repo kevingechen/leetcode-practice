@@ -5,6 +5,7 @@
 + [21. Merge Two Sorted Lists](linked-list/21-Merge_Two_Sorted_Lists/)
 + [86. Partiion List](linked-list/86-Partition_List/)
 + [141. Linked List Cycle](linked-list/141-Linked_List_Cycle/)
++ [142. Linked List Cycle II](linked-list/142-Linked_List_Cycle_II/)
 
 ## Stack
 + [20. Valid Parentheses](stack/20-Valid_Parentheses/)
