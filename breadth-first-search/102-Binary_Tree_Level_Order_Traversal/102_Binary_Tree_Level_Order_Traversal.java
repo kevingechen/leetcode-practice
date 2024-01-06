@@ -20,26 +20,31 @@ class Solution {
             return result;
         }
 
-        Deque<TreeNode> prevLevel = new ArrayDeque<>();
-        Deque<TreeNode> currentLevel = new ArrayDeque<>();
-        Deque<TreeNode> tmp;
-        prevLevel.add(root);
-        while (!prevLevel.isEmpty()) {
-            List<Integer> prevValues = new ArrayList<>();
-            while (!prevLevel.isEmpty()) {
-                TreeNode current = prevLevel.pollFirst();
-                prevValues.add(current.val);
+        List<Deque<TreeNode>> deques = new ArrayList<>();
+        Deque<TreeNode> producer, consumer;
+        deques.add(new ArrayDeque<>());
+        deques.add(new ArrayDeque<>());
+        deques.get(0).add(root);
+        TreeNode current;
+        int layerNum = 1;
+        int qIndex;
+        while (!deques.get(0).isEmpty() || !deques.get(1).isEmpty()) {
+            List<Integer> layerValues = new ArrayList<>();
+            layerNum++;
+            qIndex = layerNum % 2;
+            producer = deques.get(qIndex);
+            consumer = deques.get(1 - qIndex);
+            while (!producer.isEmpty()) {
+                current = producer.poll();
+                layerValues.add(current.val);
                 if (null != current.left) {
-                    currentLevel.offerLast(current.left);
+                    consumer.offer(current.left);
                 }
                 if (null != current.right) {
-                    currentLevel.offerLast(current.right);
+                    consumer.offer(current.right);
                 }
             }
-            result.add(prevValues);
-            tmp = prevLevel;
-            prevLevel = currentLevel;
-            currentLevel = tmp;
+            result.add(layerValues);
         }
 
         return result;
