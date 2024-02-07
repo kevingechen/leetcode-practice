@@ -14,6 +14,7 @@ Explanation: The LCA of nodes 2 and 8 is 6.
 ```
 
 **Example 2:**
+
 ![Example 2](./example_2.png)
 ```
 Input: root = [6,2,8,0,4,7,9,null,null,3,5], p = 2, q = 4
@@ -22,6 +23,7 @@ Explanation: The LCA of nodes 2 and 4 is 2, since a node can be a descendant of 
 ```
 
 **Example 3**
+
 ```
 Input: root = [2,1], p = 2, q = 1
 Output: 2
@@ -30,7 +32,7 @@ Output: 2
 **Constraints:**
 + The number of nodes in the tree is in the range `[2, 10^5]`.
 + `-10^9 <= Node.val <= 10^9`
-+ `All `Node.val` are **unique**.
++ All `Node.val` are **unique**.
 + `p != q`
 + `p` and `q` will exist in the BST.
 
