@@ -53,9 +53,14 @@
 + [235. Lowest Common Ancestor of a Binary Search Tree](binary-tree/235-Lowest_Common_Ancestor_of_a_Binary_Search_Tree/)
 + [236. Lowest Common Ancestor of a Binary Tree](binary-tree/236-Lowest_Common_Ancestor_of_a_Binary_Tree/)
 
-## Breadth First Search
+## Breadth-First Search
 + [102. Binary Tree Level Order Traversal](breadth-first-search/102-Binary_Tree_Level_Order_Traversal/)
 + [103. Binary Tree Zigzag Level Order Traversal](breadth-first-search/103-Binary_Tree_Zigzag_Level_Order_Traversal/)
-+ [126. Word Ladder II](breadth-first-search/126-Word_Ladder_II)
-+ [127. Word Ladder](breadth-first-search/127-Word_Ladder)
-+ [133. Clone Graph](breadth-first-search/133-Clone_Graph)
++ [126. Word Ladder II](breadth-first-search/126-Word_Ladder_II/)
++ [127. Word Ladder](breadth-first-search/127-Word_Ladder/)
++ [133. Clone Graph](breadth-first-search/133-Clone_Graph/)
+
+## Depth-First Search
++ [130. Surrounded Regions](depth-first-search/130-Surrounded_Regions/)
++ [200. Number of Islands](depth-first-search/200-Number_of_Islands/)
++ [329. Longest Increasing Path in a Matrix](depth-first-search/329-Longest_Increasing_Path_in_a_Matrix/)
