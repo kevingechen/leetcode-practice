@@ -64,3 +64,7 @@
 + [130. Surrounded Regions](depth-first-search/130-Surrounded_Regions/)
 + [200. Number of Islands](depth-first-search/200-Number_of_Islands/)
 + [329. Longest Increasing Path in a Matrix](depth-first-search/329-Longest_Increasing_Path_in_a_Matrix/)
+
+
+## Dynamic Programming
++ [53. Maximum Subarray](dynamic-programming/53-Maximum_Subarray/)
