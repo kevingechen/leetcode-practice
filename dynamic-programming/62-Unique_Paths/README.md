@@ -10,7 +10,7 @@ The test cases are generated so that the answer will be less than or equal to `2
 
 **Example 1:**
 
-[!Example 1](./example_1.png)
+![Example 1](./example_1.png)
 ```
 Input: m = 3, n = 7
 Output: 28
