@@ -95,3 +95,63 @@ class Solution {
     }
 }
 ```
+
+### CPP
+```cpp
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ * };
+ */
+class Solution {
+public:
+    vector<vector<int>> zigzagLevelOrder(TreeNode* root) {
+        vector<vector<int>> result;
+        if (nullptr == root) {
+            return result;
+        }
+        
+        deque<TreeNode*> deques[2];
+        deques[0].push_back(root);
+        int layerNum = 0;
+        int qIndex;
+
+        while (!deques[0].empty() || !deques[1].empty()) {
+            vector<int> layerValues;
+            qIndex = layerNum % 2;
+            auto& producer = deques[qIndex];
+            auto& consumer = deques[1 - qIndex];
+            while (!producer.empty()) {
+                TreeNode* current = producer.front();
+                producer.pop_front();
+                layerValues.push_back(current->val);
+                if (0 == qIndex) {
+                    if (nullptr != current->left) {
+                        consumer.push_front(current->left);
+                    }
+                    if (nullptr != current->right) {
+                        consumer.push_front(current->right);
+                    }
+                } else {
+                    if (nullptr != current->right) {
+                        consumer.push_front(current->right);
+                    }
+                    if (nullptr != current->left) {
+                        consumer.push_front(current->left);
+                    }
+                }
+            }
+            result.push_back(layerValues);
+            layerNum++;
+        }
+
+        return result;
+    }
+};
+```
