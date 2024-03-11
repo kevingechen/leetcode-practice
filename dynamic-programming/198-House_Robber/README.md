@@ -47,4 +47,5 @@ class Solution {
         
         return maxMoney;
     }
-}```
+}
+```
