@@ -80,3 +80,4 @@
 + [300. Longest Increasing Subsequence](dynamic-programming/300-Longest_Increasing_Subsequence/)
 + [322. Coin Change](dynamic-programming/322-Coin_Change/)
 + [518. Coin Change II](dynamic-programming/518-Coin_Change_II/)
++ [1143. Longest Common Subsequence](dynamic-programming/1143-Longest_Common_Subsequence/)
