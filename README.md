@@ -23,6 +23,7 @@
 
 ## Hashmap
 + [1. Two Sum](hashmap/1-Two_Sum/)
++ [3. Longest Substring Without Repeating Characters](/hashmap/3-Longest_Substring_Without_Repeating_Characters/)
 + [49. Group Anagrams](hashmap/49-Group_Anagrams/)
 + [73. Set Matrix Zeros](hashmap/73-Set_Matrix_Zeros/)
 + [128. Longest Consecutive Sequence](hashmap/128-Longest_Consecutive_Sequence/)
