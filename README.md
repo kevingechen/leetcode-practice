@@ -22,7 +22,8 @@
 + [239. Sliding Window Maximum](queue/239-Sliding_Window_Maximum/)
 
 ## Array
-+ [3. Longest Substring Without Repeating Characters](/array/3-Longest_Substring_Without_Repeating_Characters/)
++ [3. Longest Substring Without Repeating Characters](array/3-Longest_Substring_Without_Repeating_Characters/)
++ [41. First Missing Positive](array/41-First_Missing_Positive/)
 
 
 ## Hashmap
