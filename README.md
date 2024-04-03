@@ -25,6 +25,7 @@
 + [3. Longest Substring Without Repeating Characters](array/3-Longest_Substring_Without_Repeating_Characters/)
 + [41. First Missing Positive](array/41-First_Missing_Positive/)
 + [42. Trapping Rain Water](array/42-Trapping_Rain_Water/)
++ [88. Merge Sorted Array](array/88-Merge_Sorted_Array/)
 
 
 ## Hashmap
